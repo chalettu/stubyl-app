@@ -11,6 +11,7 @@
     "build-renderer": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.renderer.prod.babel.js --colors",
     "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 yarn start-renderer-dev",
     "lint": "cross-env NODE_ENV=development eslint --cache --format=pretty .",
+    "lint-test": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
     "lint-fix": "yarn --silent lint --fix; exit 0",
     "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
     "lint-styles-fix": "yarn --silent lint-styles --fix; exit 0",
@@ -34,7 +35,7 @@
     "test-watch": "yarn test --watch"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.{js,jsx,tsx}": [
       "cross-env NODE_ENV=development eslint --cache --format=pretty",
       "prettier --ignore-path .eslintignore --single-quote --write",
       "git add"
@@ -191,6 +192,8 @@
     "@types/react-redux": "^6.0.12",
     "@types/react-router-dom": "^4.3.1",
     "@types/redux-logger": "^3.0.6",
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
@@ -210,9 +213,9 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "enzyme-to-json": "^3.3.5",
-    "eslint": "^5.12.0",
+    "eslint": "^6.5.1",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-prettier": "^6.4.0",
     "eslint-formatter-pretty": "^2.0.0",
     "eslint-import-resolver-webpack": "^0.10.1",
     "eslint-plugin-compat": "^2.6.3",
@@ -233,7 +236,7 @@
     "node-sass": "^4.11.0",
     "opencollective-postinstall": "^2.0.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "prettier": "^1.15.3",
+    "prettier": "^1.18.2",
     "react-test-renderer": "^16.7.0",
     "redux-logger": "^3.0.6",
     "rimraf": "^2.6.3",
@@ -266,6 +269,7 @@
     "electron-debug": "^2.0.0",
     "electron-log": "^2.2.17",
     "electron-updater": "^4.0.6",
+    "eslint-plugin-prettier": "^3.1.1",
     "history": "^4.7.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
