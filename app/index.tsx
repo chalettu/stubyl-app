@@ -4,8 +4,6 @@ import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.css';
-const test = '';
-Console.LOG(ARG);
 const store = configureStore();
 render(
   <AppContainer>
