@@ -7,8 +7,10 @@ const styles = require('./Home.css');
 import axios from 'axios';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as Handlebars from 'handlebars';
+//import * as Handlebars from 'handlebars';
 import Button from '@material-ui/core/Button';
+import CodeContainer from './CodeContainer';
+import * as Sqrl from 'squirrelly';
 
 type Props = {};
 const initialState = { test: '' };
@@ -22,22 +24,19 @@ export default class Home extends Component<Props, State> {
       console.log(res.data.response);
       this.setState({ test: res.data.response });
     });
-    const test = path.join(__dirname, 'files');
-    console.log(__dirname);
-    //load a template
-    console.log(test);
-    const data = fs.readFileSync(`${test}/test.hbs`);
-
-    const template = Handlebars.compile(data.toString());
-    console.log(template);
-    const context = {
-      models: [{ name: 'test', type: 'string', required: 'true' }]
-    };
-    const html = template(context);
-    console.log(html);
   }
 
   render() {
+    const test = path.join(__dirname, 'files');
+
+    const data = fs.readFileSync(`${test}/test.hbs`, 'utf8');
+    // const template = Handlebars.compile(data);
+    // console.log(template);
+    const context = {
+      models: [{ name: 'test', type: 'string', required: 'true' }]
+    };
+    const sourceCode = Sqrl.Render(data, context);
+    //  const sourceCode = template(context);
     return (
       <div className={styles.container} data-tid="container">
         <h2>Home</h2>
@@ -46,6 +45,7 @@ export default class Home extends Component<Props, State> {
           Hello World
         </Button>
         <Link to={routes.COUNTER}>to Counter</Link>
+        <CodeContainer code={sourceCode}></CodeContainer>
       </div>
     );
   }

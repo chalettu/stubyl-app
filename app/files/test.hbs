@@ -1,8 +1,8 @@
 // api/models/Product.js
 module.exports = {
   attributes: {
-  {{#each models}}
-{{name}}: { type: '{{type}}', required: {{required}} },
-  {{/each}}
+{{each(options.models)}}
+    {{@this.name}}:{type:{{@this.type}}, required:{{@this.required}}}
+{{/each}}
   },
 };
