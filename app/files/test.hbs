@@ -1,6 +1,8 @@
-<div class="entry">
-  <h1>{{title}}</h1>
-  <div class="body">
-    {{body}}
-  </div>
-</div>
+// api/models/Product.js
+module.exports = {
+  attributes: {
+  {{#each models}}
+{{name}}: { type: '{{type}}', required: {{required}} },
+  {{/each}}
+  },
+};
